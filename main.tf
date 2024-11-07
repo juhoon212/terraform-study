@@ -14,4 +14,18 @@ provider "aws" {
 //create vpc
 resource "aws_vpc" "default" {
   cidr_block = "10.0.0.0/16"
+
+  tags = {
+    Name = "main"
+  }
+}
+
+resource "aws_subnet" "public_subnet_1" {
+  vpc_id     = aws_vpc.default.id
+  cidr_block = "10.0.0.0/24"
+}
+
+resource "aws_subnet" "private_subnet_1" {
+  vpc_id     = aws_vpc.default.id
+  cidr_block = "10.0.1.0/24"
 }
